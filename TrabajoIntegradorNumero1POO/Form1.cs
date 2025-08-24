@@ -26,16 +26,36 @@ namespace TrabajoIntegradorNumero1POO
         bool insertoNuevaFechaDeNacimiento = false;
         bool modificoElActivo = false;
 
-        string Antiguedad(AlumnoConstructor alumno)
+        void Antiguedad(AlumnoConstructor alumnoSelected)
         {
-            TimeSpan diferencia = DateTime.Now - alumno.Fecha_Ingreso;
+            TimeSpan diferencia = DateTime.Now - alumnoSelected.Fecha_Ingreso;
+            int diasTotales = (int)diferencia.TotalDays;
             int años = (int)(diferencia.TotalDays / 365.25);
-            return años.ToString();
+            int meses = (int)diferencia.TotalDays / 30;
+            string resultados = años.ToString() + "Años"
+                + "/" + meses.ToString() + " Meses"
+                + "/" + diasTotales.ToString() + " Dias";
+
+            txtAntiguedad.Text = resultados;
+        }
+
+        void Materias_No_Aprobadas(AlumnoConstructor alumnoSelected)
+        {
+            int materiasNoAprobadas = 36 - alumnoSelected.MateriaAprobadas;
+            txtMateriaNoAprobadas.Text = Convert.ToString(materiasNoAprobadas);
+        }
+
+        void Edad_De_Ingreso(AlumnoConstructor alumnoSelected)
+        {
+            TimeSpan diferencia = DateTime.Now - alumnoSelected.Fecha_Nacimiento;
+            int diasTotales = (int)diferencia.TotalDays;
+            int años = (int)(diferencia.TotalDays / 365.25);
+            txtEdadDeIngreso.Text = Convert.ToString(años);
         }
 
 
-        // ############## Metodos relacionado a data griew view ####################
-        AlumnoConstructor RowSelect()
+            // ############## Metodos relacionado a data griew view ####################
+            AlumnoConstructor RowSelect()
         {
             return alumnos[dgrListaAlumnos.CurrentRow.Index];
         }
@@ -53,19 +73,6 @@ namespace TrabajoIntegradorNumero1POO
         private bool IsEmpty(TextBox txt)
         {
             return string.IsNullOrWhiteSpace(txt.Text);
-        }
-
-        void LlenarInputs()
-        {
-            AlumnoConstructor alumnoSeleccionado = RowSelect();
-            txtLegajo.Text = alumnoSeleccionado.Legajo.ToString();
-            txtNombre.Text = alumnoSeleccionado.Nombre.ToString();
-            txtApellido.Text = alumnoSeleccionado.Apellido.ToString();
-            dtpFechaDeNacimiento.Value = alumnoSeleccionado.Fecha_Nacimiento;
-            dtpFechaDeIngreso.Value = alumnoSeleccionado.Fecha_Ingreso;
-            txtEdad.Text = alumnoSeleccionado.Edad.ToString();
-            cbxActivo.Checked = alumnoSeleccionado.Activo;
-            txtCantidadDeMateriasAprobadas.Text = alumnoSeleccionado.MateriaAprobadas.ToString();
         }
 
         void ClearInputs()
@@ -194,9 +201,10 @@ namespace TrabajoIntegradorNumero1POO
         }
 
         private void dgrListaAlumnos_SelectionChanged(object sender, EventArgs e)
-        { 
-            //Escucha Eveto de seleccion
-            // LlenarInputs();
+        {
+            Antiguedad(RowSelect());
+            Materias_No_Aprobadas(RowSelect());
+            Edad_De_Ingreso(RowSelect());
         }
 
         private void dtpFechaDeIngreso_ValueChanged(object sender, EventArgs e)
