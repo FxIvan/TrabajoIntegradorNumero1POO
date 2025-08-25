@@ -208,3 +208,9 @@ class Curso
 - [ ] Aplicar jerarquía: organizar con herencia y agregación.
 - [ ] Revisar modularidad: clases claras, con una sola responsabilidad.
 - [ ] Documentar la identidad, estado y comportamiento de cada objeto.
+---
+
+*** Finalizador Salida ***
+<img width="1234" height="483" alt="image" src="https://github.com/user-attachments/assets/d94e5de5-830f-47ef-96d0-397bb35eefb2" />
+
+
