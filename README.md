@@ -7,7 +7,21 @@ Basada en los contenidos de la materia **Programación Orientada a Objetos** (Un
 
 ## 1. Análisis del dominio
 - [ ] Identificar el **dominio del problema** (¿qué quiero modelar?).
+Ejemplo: queremos modelar un sistema de gestión escolar para alumnos.
+```
+// Dominio: Sistema Escolar
+// Objetivo: Administrar alumnos y su información académica
+```
 - [ ] Detectar los **objetos reales** que forman parte del dominio.
+👉 Ejemplo: dentro del dominio escolar detectamos:
+> Alumno
+> Profesor
+> Curso
+> Materia
+```
+// Objetos reales detectados en el dominio
+// Alumno, Profesor, Curso, Materia
+```
 - [ ] Definir **atributos (estado)** y **comportamientos (métodos)** de cada objeto.
 - [ ] Aplicar **abstracción** → transformar objetos reales en **clases**.
 
