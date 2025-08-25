@@ -21,42 +21,13 @@ namespace TrabajoIntegradorNumero1POO
 
         List<AlumnoConstructor> alumnos = new List<AlumnoConstructor>();
 
-
         bool insertoNuevaFechaDeIngreso = false;
         bool insertoNuevaFechaDeNacimiento = false;
         bool modificoElActivo = false;
 
-        void Antiguedad(AlumnoConstructor alumnoSelected)
+        AlumnoConstructor RowSelect()
         {
-            TimeSpan diferencia = DateTime.Now - alumnoSelected.Fecha_Ingreso;
-            int diasTotales = (int)diferencia.TotalDays;
-            int años = (int)(diferencia.TotalDays / 365.25);
-            int meses = (int)diferencia.TotalDays / 30;
-            string resultados = años.ToString() + "Años"
-                + "/" + meses.ToString() + " Meses"
-                + "/" + diasTotales.ToString() + " Dias";
-
-            txtAntiguedad.Text = resultados;
-        }
-
-        void Materias_No_Aprobadas(AlumnoConstructor alumnoSelected)
-        {
-            int materiasNoAprobadas = 36 - alumnoSelected.MateriaAprobadas;
-            txtMateriaNoAprobadas.Text = Convert.ToString(materiasNoAprobadas);
-        }
-
-        void Edad_De_Ingreso(AlumnoConstructor alumnoSelected)
-        {
-            TimeSpan diferencia = DateTime.Now - alumnoSelected.Fecha_Nacimiento;
-            int diasTotales = (int)diferencia.TotalDays;
-            int años = (int)(diferencia.TotalDays / 365.25);
-            txtEdadDeIngreso.Text = Convert.ToString(años);
-        }
-
-
-            // ############## Metodos relacionado a data griew view ####################
-            AlumnoConstructor RowSelect()
-        {
+            MessageBox.Show("${dgrListaAlumnos.CurrentRow.Index}");
             return alumnos[dgrListaAlumnos.CurrentRow.Index];
         }
 
@@ -86,6 +57,7 @@ namespace TrabajoIntegradorNumero1POO
             cbxActivo.Checked = false;
             txtCantidadDeMateriasAprobadas.Text = "";
         }
+
         void RowModification()
         {
 
@@ -202,9 +174,11 @@ namespace TrabajoIntegradorNumero1POO
 
         private void dgrListaAlumnos_SelectionChanged(object sender, EventArgs e)
         {
-            Antiguedad(RowSelect());
-            Materias_No_Aprobadas(RowSelect());
-            Edad_De_Ingreso(RowSelect());
+            AlumnoConstructor alumno = RowSelect();
+
+            txtAntiguedad.Text = alumno.CalcularAntiguedad();
+            txtMateriaNoAprobadas.Text = alumno.MateriasNoAprobadas().ToString();
+            txtEdadDeIngreso.Text = alumno.CalcularEdadActual().ToString();
         }
 
         private void dtpFechaDeIngreso_ValueChanged(object sender, EventArgs e)

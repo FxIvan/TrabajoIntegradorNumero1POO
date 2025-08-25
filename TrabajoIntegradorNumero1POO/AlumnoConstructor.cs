@@ -4,16 +4,17 @@ namespace TrabajoIntegradorNumero1POO
 {
     internal class AlumnoConstructor
     {
-        public string Legajo;
-        public string Nombre;
-        public string Apellido;
-        public DateTime Fecha_Nacimiento;
-        public DateTime Fecha_Ingreso;
-        public int Edad;
-        public bool Activo;
-        public int MateriaAprobadas;
+        // 🔹 Propiedades (encapsulan los campos)
+        public string Legajo { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public DateTime Fecha_Nacimiento { get; set; }
+        public DateTime Fecha_Ingreso { get; set; }
+        public int Edad { get; set; }
+        public bool Activo { get; set; }
+        public int MateriaAprobadas { get; set; }
 
-        // 🔹 Constructor sin parámetros (valores por defecto)
+        // 🔹 Constructor sin parámetros (por defecto)
         public AlumnoConstructor()
         {
             Legajo = "Sin asignar";
@@ -26,7 +27,7 @@ namespace TrabajoIntegradorNumero1POO
             MateriaAprobadas = 0;
         }
 
-        // 🔹 Constructor con todos los parámetros
+        // 🔹 Constructor con parámetros
         public AlumnoConstructor(
             string legajo,
             string nombre,
@@ -45,6 +46,33 @@ namespace TrabajoIntegradorNumero1POO
             Edad = edad;
             Activo = activo;
             MateriaAprobadas = materiaAprobadas;
+        }
+
+        // ================== MÉTODOS (comportamiento del alumno) ==================
+
+        // 🔹 Antigüedad en la institución
+        public string CalcularAntiguedad()
+        {
+            TimeSpan diferencia = DateTime.Now - Fecha_Ingreso;
+            int diasTotales = (int)diferencia.TotalDays;
+            int años = (int)(diferencia.TotalDays / 365.25);
+            int meses = diasTotales / 30;
+
+            return $"{años} Años / {meses} Meses / {diasTotales} Días";
+        }
+
+        // 🔹 Materias faltantes para recibirse
+        public int MateriasNoAprobadas()
+        {
+            const int TOTAL_MATERIAS = 36;
+            return TOTAL_MATERIAS - MateriaAprobadas;
+        }
+
+        // 🔹 Edad actual (si no querés depender de lo ingresado en txtEdad)
+        public int CalcularEdadActual()
+        {
+            TimeSpan diferencia = DateTime.Now - Fecha_Nacimiento;
+            return (int)(diferencia.TotalDays / 365.25);
         }
     }
 }
