@@ -79,11 +79,101 @@ class Curso
 
 ## 2. Definición de clases
 - [ ] Crear las **clases** principales necesarias.
+
+👉 Ejemplo: definimos las clases Alumno y Curso.
+```
+class Alumno { }
+class Curso { }
+```
+
 - [ ] Definir **campos** y **constantes** internos.
+
+👉 Los campos suelen ser privados, y las constantes son valores fijos dentro de la clase.
+```
+class Alumno
+{
+    // Campo privado
+    private int edad;
+
+    // Constante (nunca cambia)
+    private const int TOTAL_MATERIAS = 36;
+}
+
+```
 - [ ] Implementar **propiedades** con `get` y `set` para controlar acceso.
+
+👉 Con las propiedades se puede controlar la lectura/escritura de los atributos.
+```
+class Alumno
+{
+    private int edad;
+
+    // Propiedad con validación en el set
+    public int Edad
+    {
+        get => edad;
+        set
+        {
+            if (value >= 0) edad = value;
+        }
+    }
+
+    // Propiedad autoimplementada
+    public string Nombre { get; set; }
+}
+
+```
 - [ ] Respetar **encapsulamiento** (lo que se oculta / lo que se expone).
+
+👉 Se usan modificadores de acceso (public, private, protected, internal).
+```
+class Alumno
+{
+    // Campo privado (oculto al exterior)
+    private string legajo;
+
+    // Propiedad pública para exponer de forma controlada
+    public string Legajo
+    {
+        get => legajo;
+        set
+        {
+            if (!string.IsNullOrEmpty(value))
+                legajo = value;
+        }
+    }
+}
+```
+
 - [ ] Revisar **modularidad**: cohesión alta y acoplamiento bajo.
 
+👉 Ejemplo: cada clase hace una sola cosa bien (principio SRP).
+```
+class Alumno
+{
+    public string Nombre { get; set; }
+    public int MateriasAprobadas { get; set; }
+
+    public int MateriasRestantes()
+    {
+        const int TOTAL = 36;
+        return TOTAL - MateriasAprobadas;
+    }
+}
+
+// Clase Curso no depende de la lógica de Alumno
+class Curso
+{
+    public string Nombre { get; set; }
+    public List<Alumno> Alumnos { get; set; } = new List<Alumno>();
+
+    public void AgregarAlumno(Alumno alumno)
+    {
+        Alumnos.Add(alumno);
+    }
+}
+
+```
 ---
 3. Relaciones entre clases
 - [ ] Determinar si existe relación “Es-Un” (Herencia).
