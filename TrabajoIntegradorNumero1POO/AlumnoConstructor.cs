@@ -74,5 +74,10 @@ namespace TrabajoIntegradorNumero1POO
             TimeSpan diferencia = DateTime.Now - Fecha_Nacimiento;
             return (int)(diferencia.TotalDays / 365.25);
         }
+
+        ~AlumnoConstructor()
+        {
+            Console.WriteLine($"Finalizando Alumno: {Legajo} - {Nombre} {Apellido}");
+        }
     }
 }

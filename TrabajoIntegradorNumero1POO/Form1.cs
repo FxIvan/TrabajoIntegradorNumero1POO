@@ -27,7 +27,6 @@ namespace TrabajoIntegradorNumero1POO
 
         AlumnoConstructor RowSelect()
         {
-            MessageBox.Show("${dgrListaAlumnos.CurrentRow.Index}");
             return alumnos[dgrListaAlumnos.CurrentRow.Index];
         }
 
